@@ -17,7 +17,7 @@ app.post('/', async (req, res) => {
 
   try {
     const chatCompletion = await openai.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-3.5-turbo',
       messages: [
         { role: 'system', content: 'Você é uma IA útil e amigável.' },
         { role: 'user', content: question },
@@ -30,7 +30,7 @@ app.post('/', async (req, res) => {
     res.json({ answer });
 
   } catch (error) {
-    console.error(error);
+    console.error("Erro ao chamar OpenAI:", error.response?.data || error.message || error);
     res.status(500).json({ answer: 'Erro ao consultar a IA.' });
   }
 });
@@ -38,3 +38,4 @@ app.post('/', async (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+

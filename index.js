@@ -18,7 +18,8 @@ app.post("/ask", async (req, res) => {
     const response = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
       {
-        model: "openrouter/openai/gpt-3.5-turbo", // ou outro modelo suportado
+       model: "openai/gpt-3.5-turbo" // CERTO
+
         messages: [{ role: "user", content: question }],
       },
       {
@@ -42,5 +43,6 @@ app.post("/ask", async (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
 
 

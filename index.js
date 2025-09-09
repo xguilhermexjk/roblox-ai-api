@@ -1,41 +1,46 @@
-const express = require('express');
-const cors = require('cors');
-const { OpenAI } = require('openai');
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const axios = require("axios");
+
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 10000;
 
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-app.post('/', async (req, res) => {
+app.post("/ask", async (req, res) => {
   const { question } = req.body;
 
   try {
-    const chatCompletion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        { role: 'system', content: 'Você é uma IA útil e amigável.' },
-        { role: 'user', content: question },
-      ],
-      max_tokens: 150,
-      temperature: 0.7,
-    });
+    const response = await axios.post(
+      "https://openrouter.ai/api/v1/chat/completions",
+      {
+        model: "openrouter/openai/gpt-3.5-turbo", // ou outro modelo suportado
+        messages: [{ role: "user", content: question }],
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          "Content-Type": "application/json",
+          "HTTP-Referer": "https://seuprojeto.com", // pode pôr qualquer domínio
+          "X-Title": "RobloxIA",
+        },
+      }
+    );
 
-    const answer = chatCompletion.choices[0].message.content;
+    const answer = response.data.choices[0].message.content;
     res.json({ answer });
-
   } catch (error) {
-    console.error("Erro ao chamar OpenAI:", error.response?.data || error.message || error);
-    res.status(500).json({ answer: 'Erro ao consultar a IA.' });
+    console.error("Erro ao chamar OpenRouter:", error.response?.data || error.message);
+    res.status(500).json({ answer: "Erro ao chamar OpenRouter." });
   }
 });
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
 

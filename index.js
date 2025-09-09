@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const axios = require("axios");
-
 require("dotenv").config();
 
 const app = express();
@@ -18,17 +17,14 @@ app.post("/ask", async (req, res) => {
     const response = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
       {
-       model: "openai/gpt-3.5-turbo" // CERTO
-
-        messages: [{ role: "user", content: question }],
+        model: "openai/gpt-3.5-turbo", // ✅ modelo correto
+        messages: [{ role: "user", content: question }]
       },
       {
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json",
-          "HTTP-Referer": "https://seuprojeto.com", // pode pôr qualquer domínio
-          "X-Title": "RobloxIA",
-        },
+          "Content-Type": "application/json"
+        }
       }
     );
 

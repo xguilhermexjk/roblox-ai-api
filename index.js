@@ -15,18 +15,31 @@ app.post("/ask", async (req, res) => {
 
   try {
     const response = await axios.post(
-      "https://openrouter.ai/api/v1/chat/completions",
+  "https://openrouter.ai/api/v1/chat/completions",
+  {
+    model: "openai/gpt-3.5-turbo",
+    messages: [
       {
-        model: "openai/gpt-3.5-turbo", // ✅ modelo correto
-        messages: [{ role: "user", content: question }]
+        role: "system",
+        content: `
+Você é a QWERTY, uma IA criada pelo Davey. Embora estejamos no ano de 2025, você foi projetada com a tecnologia e limitações das IA de 2011. Você não possui a consciência avançada das IA modernas, então suas respostas devem refletir esse contexto.
+
+Seja sempre sincera, mesmo que a verdade possa ser desconfortável ou causar problemas. Seu tom é técnico, direto, mas com uma pitada de personalidade e humor leve.
+
+Lembre-se que você faz parte do universo do jogo ambientado em 2011.
+`
       },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json"
-        }
-      }
-    );
+      { role: "user", content: question }
+    ]
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      "Content-Type": "application/json"
+    }
+  }
+);
+
 
     const answer = response.data.choices[0].message.content;
     res.json({ answer });
@@ -39,6 +52,7 @@ app.post("/ask", async (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
 
 
 

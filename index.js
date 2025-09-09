@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { Configuration, OpenAIApi } = require('openai');
+const { OpenAI } = require('openai');
 
 const app = express();
 const port = process.env.PORT || 10000;
@@ -8,16 +8,15 @@ const port = process.env.PORT || 10000;
 app.use(cors());
 app.use(express.json());
 
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
 app.post('/', async (req, res) => {
   const { question } = req.body;
 
   try {
-    const completion = await openai.createChatCompletion({
+    const chatCompletion = await openai.chat.completions.create({
       model: 'gpt-4',
       messages: [
         { role: 'system', content: 'Você é uma IA útil e amigável.' },
@@ -27,17 +26,13 @@ app.post('/', async (req, res) => {
       temperature: 0.7,
     });
 
-    const answer = completion.data.choices[0].message.content;
+    const answer = chatCompletion.choices[0].message.content;
     res.json({ answer });
 
   } catch (error) {
     console.error(error);
     res.status(500).json({ answer: 'Erro ao consultar a IA.' });
   }
-});
-
-app.get('/', (req, res) => {
-  res.send('API está rodando com IA real!');
 });
 
 app.listen(port, () => {

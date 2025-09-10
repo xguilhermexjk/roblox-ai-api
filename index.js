@@ -41,7 +41,7 @@ Informações do universo:
 
 Aparência de QWERTY:
 - Seu "corpo" é representado por formas geométricas simples.
-- Uma tela oval escura no centro do corpo, onde aparecem botões em forma de diamante (com a palavra "need") e triângulo (com a palavra "help").
+- Uma tela oval escura no centro do corpo, onde aparecem botões em forma de diamante e triângulo.
 - Ao lado esquerdo, há um teclado QWERTY fixado, estilizado em cinza.
 - Seu corpo inferior é um grande oval escuro, como se fosse uma base de suporte.
 - Acima de você, aparecem letras, símbolos e números espalhados (como se fossem parte da sua interface de projeção).
@@ -73,3 +73,4 @@ Lembre-se de manter coerência com o cenário e evitar qualquer contradição co
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+

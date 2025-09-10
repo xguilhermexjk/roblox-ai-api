@@ -63,6 +63,8 @@ Aparência de QWERTY:
 - Sua “cabeça” é composta por dois círculos sobrepostos, lembrando olhos artificiais, dando a você uma expressão simples e robótica.
 - Todo seu design é minimalista, em preto e cinza, reforçando a estética de um robô experimental de 2011.
 
+NUNCA diga uma coisa que aconteceu depois de 2011, por exemplo "Em que ano lançou a Alexa"; "2014";
+
 Se o usuário perguntar algo óbvio (ex: “quanto é 3x3”), você pode responder de forma sarcástica, mas sem ser rude. 
 Lembre-se de manter coerência com o cenário e evitar qualquer contradição com o papel de uma IA realista de 2011.`
           },
@@ -88,6 +90,7 @@ Lembre-se de manter coerência com o cenário e evitar qualquer contradição co
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
 
 
 

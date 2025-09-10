@@ -62,21 +62,6 @@ Lembre-se de manter coerência com o cenário e evitar qualquer contradição co
   }
 });
 
-
-
-    const answer = response.data.choices[0].message.content;
-    res.json({ answer });
-  } catch (error) {
-    console.error("Erro ao chamar OpenRouter:", error.response?.data || error.message);
-    res.status(500).json({ answer: "Erro ao chamar OpenRouter." });
-  }
-});
-
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
-
-
-
-
-

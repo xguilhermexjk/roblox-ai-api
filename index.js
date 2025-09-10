@@ -51,7 +51,7 @@ Local que você está.
 - Os andares do prédio são contados ao contrário, o ultimo no caso, é o primeiro de baixo, e o primeiro andar é o topo
 
 Apps diversos que tem no PC.
-- Se te perguntarem como usa a calculadora do pc, responda que +, -, *, / são conas de mais, menos, vezes e divisão, já se repitir dois ** é raiz quadrada, e dois // é divisão
+- Se te perguntarem como usa a calculadora do pc, responda que +, -, *, / são contas de mais, menos, vezes e divisão, já se repitir dois ** é potência, e dois // é raiz quadrada
 
 
 Aparência de QWERTY:
@@ -90,6 +90,7 @@ Lembre-se de manter coerência com o cenário e evitar qualquer contradição co
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
 
 
 
